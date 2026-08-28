@@ -1,0 +1,10 @@
+{
+  "name": "Snacka V1.2",
+  "description": "En säker samtalsapp för barn där de kan ringa godkända kontakter via e-post över WiFi och mobildata, med PIN-skyddat föräldraläge.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

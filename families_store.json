@@ -1,0 +1,27 @@
+[
+  {
+    "parentEmail": "astrid@familjen.se",
+    "childEmail": "astrid@familjen.se",
+    "childName": "Astrid",
+    "syncCode": "SNACKA-4794",
+    "settings": {
+      "pin": "123456",
+      "childName": "Astrid",
+      "childEmail": "astrid@familjen.se",
+      "childAvatar": "👧",
+      "childColor": "amber",
+      "bedtimeLockEnabled": false,
+      "bedtimeStart": "20:00",
+      "bedtimeEnd": "07:00",
+      "onlyAllowApprovedContacts": true,
+      "maxCallDurationMinutes": 30,
+      "ringtone": "playful",
+      "soundVolume": 80,
+      "childStatus": "Online & Redo",
+      "theme": "system"
+    },
+    "contacts": [],
+    "callLogs": [],
+    "updatedAt": 1787930006553
+  }
+]
