@@ -147,6 +147,9 @@ async function getEmailTransporter() {
           user: smtpUser,
           pass: smtpPass,
         },
+        tls: {
+          rejectUnauthorized: false,
+        },
       }),
       from: process.env.SMTP_FROM || `"Snacka Föräldrakontroll" <${smtpUser}>`,
       isTest: false,
