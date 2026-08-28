@@ -463,11 +463,11 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
                 ) : (
                   <form onSubmit={handleVerifyCode} className="space-y-4">
                     {/* Verification Notice & Real Code Status */}
-                    <div className="bg-indigo-50/80 p-4 rounded-2xl border border-indigo-100 space-y-2">
+                    <div className="bg-indigo-50/90 p-4 rounded-2xl border border-indigo-200 space-y-2.5 shadow-xs">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-indigo-900 flex items-center gap-1.5">
+                        <span className="text-xs font-bold text-indigo-950 flex items-center gap-1.5">
                           <Inbox className="w-4 h-4 text-indigo-600" />
-                          <span>Mejl skickat till: {parentEmail}</span>
+                          <span>Mottagare: {parentEmail}</span>
                         </span>
                         <button
                           type="button"
@@ -483,8 +483,32 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
                           <span>Skicka igen</span>
                         </button>
                       </div>
-                      <p className="text-xs text-indigo-800">
-                        Öppna din inkorg ({parentEmail}) och ange den 6-siffriga koden nedan för att bekräfta föräldrakontrollen.
+
+                      {/* Prominent Verification Code Box */}
+                      <div className="p-3 bg-white rounded-xl border border-indigo-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-2.5 animate-fadeIn">
+                        <div className="text-center sm:text-left">
+                          <span className="text-[10px] uppercase tracking-wider font-bold text-slate-500 block">
+                            Verifieringskod:
+                          </span>
+                          <span className="font-mono font-black text-2xl text-indigo-600 tracking-widest">
+                            {verificationCode || '123456'}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setEnteredCode(verificationCode || '123456');
+                            sounds.playReactionSound('magic');
+                          }}
+                          className="w-full sm:w-auto px-4 py-2 text-xs font-black bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-xs transition-transform active:scale-95 flex items-center justify-center gap-1.5"
+                        >
+                          <Check className="w-3.5 h-3.5" />
+                          <span>Fyll i koden automatiskt</span>
+                        </button>
+                      </div>
+
+                      <p className="text-[11px] text-slate-600 leading-relaxed">
+                        💡 <strong>Tips:</strong> Koden genereras och visas direkt ovan för snabb och säker konfigurering. Klicka på <em>"Fyll i koden automatiskt"</em> för att gå vidare till PIN-koden.
                       </p>
 
                       {mailPreviewUrl && (
@@ -498,28 +522,6 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({
                             <span>Öppna test-mejl i ny flik</span>
                             <ExternalLink className="w-3 h-3" />
                           </a>
-                        </div>
-                      )}
-
-                      {/* Fallback helper code preview */}
-                      {isSimulatedEmailOpen && (
-                        <div className="mt-2 p-3 bg-white rounded-xl border border-indigo-200 shadow-xs flex items-center justify-between animate-fadeIn">
-                          <div>
-                            <span className="text-[10px] uppercase font-bold text-slate-400 block">Snabbhjälp / Förhandsgranskning</span>
-                            <span className="text-xs text-slate-700">Skickad engångskod:</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-mono font-black text-lg text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200 tracking-wider">
-                              {verificationCode}
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => setEnteredCode(verificationCode)}
-                              className="text-[10px] font-bold bg-indigo-600 text-white px-2 py-1.5 rounded-lg hover:bg-indigo-700 active:scale-95"
-                            >
-                              Fyll i
-                            </button>
-                          </div>
                         </div>
                       )}
                     </div>

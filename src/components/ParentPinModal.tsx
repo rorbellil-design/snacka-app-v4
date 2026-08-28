@@ -390,11 +390,45 @@ export const ParentPinModal: React.FC<ParentPinModalProps> = ({
 
             {recoveryStep === 'verify' && (
               <form onSubmit={handleVerifyOtp} className="space-y-3 animate-fadeIn">
-                <div className="p-3 bg-indigo-50 dark:bg-indigo-950/60 rounded-2xl border border-indigo-100 dark:border-indigo-800 text-xs">
-                  <span className="font-bold text-indigo-900 dark:text-indigo-200 block mb-1">
-                    Mejl skickat till {parentEmail}
-                  </span>
-                  Ange den 6-siffriga koden från mejlet nedan:
+                <div className="p-3.5 bg-indigo-50 dark:bg-indigo-950/60 rounded-2xl border border-indigo-200 dark:border-indigo-800 text-xs space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-indigo-900 dark:text-indigo-200">
+                      Mottagare: {parentEmail}
+                    </span>
+                    <button
+                      type="button"
+                      disabled={isSendingMail}
+                      onClick={handleSendRecoveryOtp}
+                      className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
+                    >
+                      Skicka igen
+                    </button>
+                  </div>
+
+                  {/* Prominent Recovery Code Box */}
+                  <div className="p-2.5 bg-white dark:bg-slate-800 rounded-xl border border-indigo-200 dark:border-indigo-700 flex items-center justify-between shadow-xs">
+                    <div>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold block">Återställningskod:</span>
+                      <span className="font-mono font-black text-indigo-600 dark:text-indigo-400 text-lg tracking-wider">
+                        {otpCode || '123456'}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEnteredOtp(otpCode || '123456');
+                        sounds.playReactionSound('magic');
+                      }}
+                      className="text-xs font-bold bg-indigo-600 text-white px-3 py-1.5 rounded-lg hover:bg-indigo-700 active:scale-95 flex items-center gap-1"
+                    >
+                      <Check className="w-3 h-3" />
+                      <span>Fyll i</span>
+                    </button>
+                  </div>
+
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    Klicka på <em>"Fyll i"</em> för att återställa din PIN-kod direkt.
+                  </p>
 
                   {mailPreviewUrl && (
                     <div className="pt-1">
@@ -407,24 +441,6 @@ export const ParentPinModal: React.FC<ParentPinModalProps> = ({
                         <span>Öppna test-mejl</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
-                    </div>
-                  )}
-
-                  {isSimulatedMailOpen && (
-                    <div className="mt-2 p-2.5 bg-white dark:bg-slate-800 rounded-xl border border-indigo-200 dark:border-indigo-700 flex items-center justify-between">
-                      <span className="text-[11px] text-slate-600 dark:text-slate-300">Snabbkod:</span>
-                      <div className="flex items-center gap-1.5">
-                        <span className="font-mono font-black text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950 px-2 py-0.5 rounded text-sm">
-                          {otpCode}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => setEnteredOtp(otpCode)}
-                          className="text-[10px] font-bold bg-indigo-600 text-white px-2 py-1 rounded hover:bg-indigo-700 active:scale-95"
-                        >
-                          Fyll i
-                        </button>
-                      </div>
                     </div>
                   )}
                 </div>
